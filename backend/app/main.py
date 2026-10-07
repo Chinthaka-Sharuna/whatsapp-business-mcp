@@ -9,7 +9,7 @@ logging.basicConfig(
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
-from routers import webhook
+from routers import webhook,phone_number
 
 from models.entity.users import Users
 from models.entity.conversations import Conversations
@@ -36,4 +36,8 @@ app = FastAPI(title="WhatsApp MCP Server",redirect_slashes=False)
 
 
 # Register routers
-app.include_router(webhook.router,prefix='/webhook', tags=["webhook"])
+app.include_router(webhook.router,prefix='/api/v1/webhook', tags=["webhook"])
+app.include_router(phone_number.router,prefix='/api/v1/phone_number', tags=["phone_number"])
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True, log_level="info")
