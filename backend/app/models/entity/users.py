@@ -4,7 +4,7 @@ from sqlalchemy import Column, DateTime, func
 
 from uuid import UUID,uuid4
 
-class User(SQLModel, table=True):
+class Users(SQLModel, table=True):
     __tablename__ = "users"
     user_id : UUID = Field(default_factory=uuid4, primary_key=True)
     name : str = Field(min_length=5, max_length=50, index=True, nullable=False)

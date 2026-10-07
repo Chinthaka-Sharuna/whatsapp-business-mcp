@@ -3,10 +3,10 @@ from uuid import UUID, uuid4
 from sqlalchemy import Column, DateTime, Index, func
 from sqlmodel import SQLModel, Field
 
-from app.models.enum import MessageDirection,MessageStatus
+from models.enum import MessageDirection,MessageStatus
 
 
-class Message(SQLModel, table=True):
+class Messages(SQLModel, table=True):
     __tablename__ = "messages"
     __table_args__ = (
         Index("idx_messages_conversation", "conversation_id"),
@@ -23,8 +23,7 @@ class Message(SQLModel, table=True):
                 DateTime(timezone=True),
                 default=func.now(),
                 nullable=False
-            ),
-            index=True
+            )
         )
     message_type: str = Field(nullable=False)
     message: str | None = Field(default=None)
@@ -36,8 +35,7 @@ class Message(SQLModel, table=True):
         sa_column=Column(
             DateTime(timezone=True), 
             nullable=True
-        ),
-        index=True
+        )
     )
     messaged_by: UUID | None = Field(default=None, foreign_key="users.user_id")
     reply_msg_id: UUID | None = Field(default=None, foreign_key="messages.message_id")
