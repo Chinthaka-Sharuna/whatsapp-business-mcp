@@ -3,3 +3,10 @@
 .python-version
 .venv/
 *.toml
+
+
+**/__pycache__/
+.vscode/
+.DS_Store
+
+*.ipynb
