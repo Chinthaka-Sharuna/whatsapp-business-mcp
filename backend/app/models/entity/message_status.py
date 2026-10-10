@@ -3,7 +3,7 @@ from sqlmodel import DateTime, SQLModel, Field
 from sqlalchemy import Column
 from uuid import UUID
 
-class MessageStatus(SQLModel, table=True):
+class MessageDelivery(SQLModel, table=True):
     __tablename__ = "message_status"
 
     message_id: UUID = Field(foreign_key="messages.message_id", primary_key=True)
